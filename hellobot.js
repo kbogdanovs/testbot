@@ -1,37 +1,9 @@
-
-
-
-function translate(req)
-{
-var newScript = document.createElement('script');
- 
-newScript.type = 'text/javascript';
- 
-//Restful style GET calling
-var source = 'https://www.googleapis.com/language/translate/v2?key=AIzaSyB15tsSZiJ4RlEry2QMdbWZEMNZGLgg6wg&q='+ req.body.text +'&target=es&callback=translateText'
- 
-newScript.src = source;
- 
-//Adding  dynamic script to head
-dcoument.getElementByTagName('head')[0].appendChild(newScript); //request will be sent
- 
-}
- 
-//callback function
-function translateText(response)
-{
-var resultText = response.data.translations[0].trnslatedText;
-
-
-module.exports = function
-
-
-
-module.exports = function (req, res, resultText next) {
+module.exports = function (req, res, next) {
   var userName = req.body.user_name;
-  var transText = 
+  var sourceText = req.body.text;
+  var googleResponse = 'https://www.googleapis.com/language/translate/v2?key=AIzaSyB15tsSZiJ4RlEry2QMdbWZEMNZGLgg6wg&q='+ sourceText +'&target=es&callback=translateText';
   var botPayload = {
-    text : + resultText +
+    text : + googleResponse.data.translations.translatedText +
   };
  
   // avoid infinite loop
